@@ -1,0 +1,41 @@
+﻿@model IEnumerable<TheImmutableMed.Models.RadiologyImage>
+
+<h2>🩻 Radiology Dashboard</h2>
+
+<a class="btn btn-success" asp-action="Create">
+    ➕ Upload Image
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>AI Result</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img src="@item.ImagePath" width="80" />
+                    }
+                </td>
+
+                <td>@item.ImagePath</td>
+                <td>@item.UploadDate</td>
+                <td>@item.AnalysisResult</td>
+
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">View</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

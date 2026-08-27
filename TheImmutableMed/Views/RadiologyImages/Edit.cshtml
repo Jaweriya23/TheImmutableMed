@@ -1,0 +1,52 @@
+﻿@model TheImmutableMed.Models.RadiologyImage
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>✏️ Edit Radiology Image</h2>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ImagePath" />
+
+    <div class="form-group">
+        <label>Patient</label>
+        <select asp-for="PatientId" class="form-control">
+            <option value="0">Walk-in Patient</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Replace Image (optional)</label>
+        <input asp-for="ImageFile" type="file" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Upload Date</label>
+        <input asp-for="UploadDate" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Notes</label>
+        <input asp-for="AnalysisResult" class="form-control" />
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-success">Save Changes</button>
+</form>
+
+<br />
+
+@if (!string.IsNullOrEmpty(Model.ImagePath))
+{
+    <h4>Current Image:</h4>
+    <img src="@Model.ImagePath" width="300" class="img-thumbnail" />
+}
+
+<br />
+<br />
+
+<a asp-action="Index">Back</a>

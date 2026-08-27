@@ -1,0 +1,26 @@
+﻿@model TheImmutableMed.Models.RadiologyImage
+
+<h2>🧠 Radiology Report</h2>
+
+<hr />
+
+<p><b>Patient ID:</b> @Model.PatientId</p>
+<p><b>Upload Date:</b> @Model.UploadDate</p>
+
+<hr />
+
+<h3>🧠 AI Analysis Result</h3>
+
+<div class="alert alert-info">
+    @Model.AnalysisResult
+</div>
+
+@if (!string.IsNullOrEmpty(Model.ImagePath))
+{
+    <img src="@Model.ImagePath" width="400" class="img-thumbnail" />
+}
+
+<br />
+<br />
+
+<a asp-action="Index" class="btn btn-secondary">Back</a>

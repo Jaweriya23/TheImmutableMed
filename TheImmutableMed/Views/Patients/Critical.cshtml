@@ -1,0 +1,21 @@
+﻿@model IEnumerable<TheImmutableMed.Models.Patient>
+
+<h2>🚨 Critical Patients</h2>
+
+@foreach (var p in Model.Where(x =>
+    x.OxygenLevel <= 88 ||
+    x.HeartRate >= 130 || x.HeartRate <= 40 ||
+    x.BloodPressure > 140 ||
+    (x.BloodPressure >= 40 && x.BloodPressure <= 60)))
+{
+    <div class="card bg-danger text-white p-3 mb-2">
+        <h4>@p.Name</h4>
+        <p>Age: @p.Age</p>
+        <p>Disease: @p.Disease</p>
+        <p>Oxygen: @p.OxygenLevel</p>
+        <p>Heart Rate: @p.HeartRate</p>
+        <p>BP: @p.BloodPressure</p>
+        <p>Doctor: @p.Doctor?.Name</p>
+    </div>
+}
+

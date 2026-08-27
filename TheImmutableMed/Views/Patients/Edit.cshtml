@@ -1,0 +1,109 @@
+﻿@model TheImmutableMed.Models.Patient
+
+@{
+    ViewData["Title"] = "Edit Patient";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-warning text-dark">
+            <h2>✏ Edit Patient</h2>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Edit">
+
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label>Name</label>
+                        <input asp-for="Name" class="form-control" />
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Age</label>
+                        <input asp-for="Age" class="form-control" />
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Gender</label>
+                        <input asp-for="Gender" class="form-control" />
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Disease</label>
+                        <input asp-for="Disease" class="form-control" />
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label>Oxygen Level</label>
+                        <input asp-for="OxygenLevel" class="form-control" />
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label>Heart Rate</label>
+                        <input asp-for="HeartRate" class="form-control" />
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label>Blood Pressure</label>
+                        <input asp-for="BloodPressure" class="form-control" />
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label>Medical History</label>
+                        <textarea asp-for="MedicalHistory" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <!-- ✅ DOCTOR DROPDOWN FIXED -->
+                    <div class="col-md-12 mb-3">
+
+                        <label>Assign Doctor</label>
+
+                        <select asp-for="DoctorId" class="form-control">
+
+                            <option value="">-- Select Doctor --</option>
+
+                            @if (ViewBag.Doctors != null)
+                            {
+                                foreach (var doc in (List<TheImmutableMed.Models.Doctor>)ViewBag.Doctors)
+                                {
+                                    if (Model.DoctorId == doc.Id)
+                                    {
+                                        <option value="@doc.Id" selected>
+                                            @doc.Name
+                                        </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@doc.Id">
+                                            @doc.Name
+                                        </option>
+                                    }
+                                }
+                            }
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    💾 Save Changes
+                </button>
+
+                <a asp-action="Index" class="btn btn-secondary">
+                    ⬅ Back
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+</div>

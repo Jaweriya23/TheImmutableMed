@@ -1,0 +1,143 @@
+﻿@model IEnumerable<TheImmutableMed.Models.Patient>
+
+@{
+    ViewData["Title"] = "Patients Dashboard";
+}
+
+<div class="container mt-4">
+
+    <div class="text-center mb-4">
+        <h1 class="display-4 fw-bold text-primary">
+            🏥 The Immutable Med
+        </h1>
+
+        <p class="lead text-muted">
+            Smart Hospital Management & Emergency Triage System
+        </p>
+    </div>
+
+    <!-- TOP BUTTONS -->
+
+    <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap">
+
+        <a class="btn btn-success btn-lg shadow"
+               asp-action="Create">
+            ➕ Add Patient
+        </a>
+
+        <a class="btn btn-danger btn-lg shadow"
+               href="/Patients/Critical">
+            🚨 Critical Patients
+        </a>
+
+        <a class="btn btn-primary btn-lg shadow"
+               href="/Doctors">
+            👨‍⚕️ Doctors
+        </a>
+
+        <a class="btn btn-info btn-lg shadow text-white"
+               href="/RadiologyImages">
+            🩻 Radiology
+        </a>
+
+    </div>
+
+    <!-- PATIENT TABLE -->
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0">📋 Patient Records</h4>
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-hover table-bordered align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Disease</th>
+                        <th>Oxygen</th>
+                        <th>Heart Rate</th>
+                        <th>Blood Pressure</th>
+                        <th>Doctor</th>
+                        <th width="250">Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        bool isCritical =
+                        item.OxygenLevel <= 88 ||
+                        item.HeartRate >= 130 ||
+                        item.HeartRate <= 40 ||
+                        item.BloodPressure > 140 ||
+                        (item.BloodPressure >= 40 &&
+                        item.BloodPressure <= 60);
+
+                        <tr class="@(isCritical ? "table-danger" : "")">
+
+                            <td>
+                                <strong>@item.Name</strong>
+                            </td>
+
+                            <td>@item.Age</td>
+
+                            <td>@item.Disease</td>
+
+                            <td>
+                                @item.OxygenLevel %
+                            </td>
+
+                            <td>
+                                @item.HeartRate bpm
+                            </td>
+
+                            <td>
+                                @item.BloodPressure
+                            </td>
+
+                            <td>
+                                @(item.Doctor?.Name ?? "Not Assigned")
+                            </td>
+
+                            <td>
+
+                                <a class="btn btn-warning btn-sm"
+                                       asp-action="Edit"
+                                       asp-route-id="@item.Id">
+                                    ✏ Edit
+                                </a>
+
+                                <a class="btn btn-info btn-sm text-white"
+                                       asp-action="Details"
+                                       asp-route-id="@item.Id">
+                                    👁 View
+                                </a>
+
+                                <a class="btn btn-danger btn-sm"
+                                       asp-action="Delete"
+                                       asp-route-id="@item.Id">
+                                    🗑 Delete
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

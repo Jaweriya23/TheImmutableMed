@@ -1,0 +1,81 @@
+﻿@model TheImmutableMed.Models.Patient
+
+@{
+    ViewData["Title"] = "Patient Details";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-info text-white">
+            <h2>👁 Patient Details</h2>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <strong>Name:</strong>
+                    <p>@Model.Name</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Age:</strong>
+                    <p>@Model.Age</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Gender:</strong>
+                    <p>@Model.Gender</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <strong>Disease:</strong>
+                    <p>@Model.Disease</p>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <strong>Oxygen Level:</strong>
+                    <p>@Model.OxygenLevel</p>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <strong>Heart Rate:</strong>
+                    <p>@Model.HeartRate</p>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <strong>Blood Pressure:</strong>
+                    <p>@Model.BloodPressure</p>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <strong>Medical History:</strong>
+                    <p>@Model.MedicalHistory</p>
+                </div>
+
+                <!-- ✅ DOCTOR FIX -->
+                <div class="col-md-12 mb-3">
+                    <strong>Doctor:</strong>
+                    <p>
+                        @(Model.Doctor != null ? Model.Doctor.Name : "Not Assigned")
+                    </p>
+                </div>
+
+            </div> 
+
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                ✏ Edit
+            </a>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                ⬅ Back
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
